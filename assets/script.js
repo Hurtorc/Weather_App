@@ -11,15 +11,18 @@ submit.addEventListener("click", function (event) {
     .then((data) => {
       console.log(data);
       const temp = data.main.temp;
-      const weather = data.weather.main;
+      const weather = data.weather[0].main;
       const icon = data.weather.id;
       const humidity = data.main.humidity;
-      const windSpeed = data.wind.speed;
+
       const tempEl = document.querySelector("#temp");
+      const weatherEl = document.querySelector("#weather");
       const humidityEl = document.querySelector("#humidity");
-      const windSpeedEl = document.querySelector("#windSpeed");
+      console.log(temp, weather, humidity);
       tempEl.textContent = temp;
+      weatherEl.textContent = weather;
       humidityEl.textContent = humidity;
-      windSpeedEl.textContent = windSpeed;
     });
 });
+
+//create a function that will take the data the previous function returns and display it on the page
