@@ -32,10 +32,11 @@ submit.addEventListener("click", function (event) {
 //function that saves the city to local storage
 function saveCity() {
   const city = document.querySelector("#city").value;
-  const cityStorage = [];
+  // get city Storage from local storage use empty array if null
+  const cityStorage = JSON.parse(localStorage.getItem("city")) || [];
   cityStorage.push(city);
   localStorage.setItem("city", JSON.stringify(city));
-  console.log(JSON.parse(localStorage.getItem("city")))
+  // console.log(JSON.parse(localStorage.getItem("city")))
 }
 
 //function that gets the city from local storage if false return default city input
