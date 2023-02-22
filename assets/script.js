@@ -5,8 +5,9 @@ const APIkey = "24ce9fa82a265157be2662144b0cf306";
 submit.addEventListener("click", function (event) {
   event.preventDefault();
   saveCity();
-  if (getCity() === null) {
-    getCity() = document.querySelector("#city").value;
+  let city = getCity();
+  if (city === null) {
+    city = document.querySelector("#city").value;
   }
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${APIkey}`;
   fetch(url)
@@ -33,16 +34,18 @@ submit.addEventListener("click", function (event) {
 function saveCity() {
   const city = document.querySelector("#city").value;
   // get city Storage from local storage use empty array if null
-  const cityStorage = JSON.parse(localStorage.getItem("city")) || [];
+  let cityStorage = JSON.parse(localStorage.getItem("city")) || [];
+  if (!Array.isArray(cityStorage)) {
+    cityStorage = [];
+  }
   cityStorage.push(city);
-  localStorage.setItem("city", JSON.stringify(city));
+  localStorage.setItem("city", JSON.stringify(cityStorage));
   // console.log(JSON.parse(localStorage.getItem("city")))
 }
 
 //function that gets the city from local storage if false return default city input
 function getCity() {
-  city = JSON.parse(localStorage.getItem("city"));
-  console.log(city);
+  return JSON.parse(localStorage.getItem("city"));
 }
 
 //display cities from local storage on the page
